@@ -8,7 +8,7 @@ import poc_ttt_provided as provided
 
 # Constants for Monte Carlo simulator
 # Change as desired
-NTRIALS = 1    # Number of trials to run
+NTRIALS = 10    # Number of trials to run
 MCMATCH = 1.0  # Score for squares played by the machine player
 MCOTHER = 1.0  # Score for squares played by the other player
 DRAW = provided.DRAW
@@ -45,19 +45,17 @@ def mc_update_scores(scores, board, player):
             for col in range(dim):
                 status = board.square(row,col)
                 if status !=EMPTY:
-                    if state == player and status == player and player == PLAYERX \
-                    or state != player and status != player and player == PLAYERO:
-                        scores[row][col] += MCMATCH
-                    elif state == player and status == player and player == PLAYERO \
-                    or state != player and status != player and player == PLAYERX:
-                        scores[row][col] += MCOTHER
-                    elif state != player and status == player and player == PLAYERX \
-                    or state == player and status != player and player == PLAYERO:
-                        scores[row][col] -= MCMATCH
-                    elif state != player and status == player and player == PLAYERO \
-                    or state == player and status != player and player == PLAYERX:
-                        scores[row][col] -= MCOTHER
-
+                                         
+                    if state == status: 
+                        coe1 = 1
+                    else: 
+                        coe1 = -1
+                       
+                    if status == PLAYERX:
+                        scores[row][col] += coe1*MCMATCH
+                    elif status == PLAYERO:
+                        scores[row][col] += coe1*MCOTHER
+                    
 def get_best_move(board, scores): 
     """
     This function takes a current board and a grid of scores. The function 
@@ -95,5 +93,5 @@ def mc_move(board, player, trials):
 # Both should be commented out when you submit for
 # testing to save time.
 
-#provided.play_game(mc_move, NTRIALS, False)        
-poc_ttt_gui.run_gui(3, provided.PLAYERX, mc_move, NTRIALS, False)
+provided.play_game(mc_move, NTRIALS, False)        
+#poc_ttt_gui.run_gui(3, provided.PLAYERX, mc_move, NTRIALS, False)
