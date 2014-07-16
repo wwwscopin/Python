@@ -20,12 +20,16 @@ def remove_duplicates(list1):
 
     This function can be iterative.
     """
-    
-    list2 = []
-    for idx in range(len(list1)):
-        if list1[idx] not in list1[idx + 1:]:
-            list2.append(list1[idx])
-    return list2
+        
+    key = None
+    lst = []  
+    for item in list1:
+        if  item != key:    
+            lst.append(item)
+        key = item
+    return lst
+
+#print remove_duplicates([9, 9, 9]) 
 
 def intersect(list1, list2):
     """
@@ -114,13 +118,10 @@ def gen_all_strings(word):
     answer = [""]
     if len(word) == 0:
         return answer
-    elif len(word) == 1:
-        answer.append(word)
-        return answer
     else:
         first = word[0]
         rest = gen_all_strings(word[1:])
-        answer = gen_all_strings(word[1:])
+        answer = rest[:]
         for string in rest:
             for idx in range(len(string)+1):
                 if idx == 0:
