@@ -1,0 +1,13 @@
+git init
+git add
+git status
+git commit WriteOut
+git push
+git push --set-upstream origin master
+git remote add origin https://.../python.git
+git remote -v
+git config user.name "wwwscopin"
+git config user.email "wbhldh@gmail.com"
+git clone
+git fetch
+git push -u origin master
